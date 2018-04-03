@@ -1,0 +1,17 @@
+/* pages/product/product.wxss */
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  padding-left: 100rpt;
+
+}
+
+.bottom-nav button{
+  float: left;
+  border-radius:unset;
+}
+
+.bottom-nav button:first{
+  width:100rpx;
+}

@@ -1,0 +1,16 @@
+{
+  "pages": [
+    
+    "pages/index/index",
+    "pages/product/product",
+    "pages/logs/logs",
+    "pages/list/list"
+   
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "芮可水果",
+    "navigationBarTextStyle": "black"
+  }
+}

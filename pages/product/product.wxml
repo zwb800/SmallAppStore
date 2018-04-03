@@ -1,0 +1,16 @@
+<swiper>
+<swiper-item>
+  <image style='height:400rpx' src='https://www.baidu.com/img/bd_logo1.png?where=super'></image>
+</swiper-item>
+<swiper-item>
+  <image style='height:400rpx'  src='https://www.baidu.com/img/bd_logo1.png?where=super'></image>
+</swiper-item>
+</swiper>
+<text class='productname'>{{productName}}</text>
+<view>{{price}}</view>
+<image style='height:1000rpx'  src='https://www.baidu.com/img/bd_logo1.png?where=super'></image>
+<view class="bottom-nav">
+<button>购物车</button>
+<button>加入购物车</button>
+<button>立即购买</button>
+</view>

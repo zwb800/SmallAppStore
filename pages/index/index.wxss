@@ -1,0 +1,27 @@
+.product{
+  border:1px solid black;
+  float:left;
+  margin-left:20rpx;
+  margin-top:30rpx;
+}
+
+.product image {
+  width:330rpx;
+  height:400rpx;
+}
+
+.productname{
+  padding-left:20rpx;
+  padding-right: 20rpx;
+}
+
+.productname text{
+  float:right;
+}
+
+
+.search{
+  border:1px solid black;
+  border-radius: 10rpx;
+  width:100%;
+}
