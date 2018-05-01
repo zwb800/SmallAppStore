@@ -1,13 +1,20 @@
-// pages/list/list.js
+// pages/confirm/confirm.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    count:1
   },
-
+  add:function(e){
+    this.data.count++;
+    this.setData({ count: this.data.count});
+  },
+  sub: function (e) {
+    this.data.count--;
+    this.setData({ count: this.data.count });
+  },
   /**
    * 生命周期函数--监听页面加载
    */

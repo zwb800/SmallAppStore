@@ -1,3 +1,5 @@
+var ProductService = require('../../services/ProductService.js');
+
 // pages/product/product.js
 Page({
 
@@ -5,12 +7,12 @@ Page({
    * 页面的初始数据
    */
   data: {
+    btnCss: ['selected',"unselected"],
       productName:'',
       price:0,
-      productList: [
-        { id: 1, name: '猕猴桃', price: 5.2 },
-        { id: 2, name: '榴莲', price: 19.8 },
-      ],
+      imgs:[],
+      product:null,
+      productList: ProductService.getList(),
   },
 
   /**
@@ -23,11 +25,32 @@ Page({
     {
       if(productList[i].id == productid)
       {
-        this.setData({productName : productList[i].name});
-        this.setData({price:productList[i].price});
+        var product = productList[i];
+        this.setData({ product:product});
         break;
       }
     }
+  },
+
+  sku_tap:function(e){
+    var skuid = e.target.dataset.skuid;
+    if(skuid){
+      console.log(skuid);
+      for(var i=0;i<this.data.btnCss.length;i++)
+      {
+        this.data.btnCss[i] = "unselected";
+      }
+      this.data.btnCss[e.target.dataset.index] = "selected";
+      this.setData({
+        btnCss:this.data.btnCss
+      });
+    }
+  },
+
+  tapBuy:function(e){
+    wx.navigateTo({
+      url: '/pages/confirm/confirm?id='+this.data.product.id,
+    });
   },
 
   /**

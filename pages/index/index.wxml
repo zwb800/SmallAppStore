@@ -1,14 +1,14 @@
 <!--index.wxml-->
 <view class="container" style=''>
-  <input class="search" type='text' placeholder='搜索'></input>
-  <view style='padding-left:5rpx'>
-  <view wx:for="{{productList}}" bindtap='tapProduct'  class="product">
+  <input class="search" type='text' placeholder='搜索' placeholder-style='text-align:center' ></input>
+  <view class='productlist'>
+  <navigator wx:key="id" wx:for="{{productList}}" url="{{'/pages/product/product?id='+item.id}}"  class="product">
   <image data-productid="{{item.id}}" 
-   src='https://www.baidu.com/img/bd_logo1.png?where=super'></image>
+   src='{{item.img}}'></image>
  <view class='productname'>
-    {{item.name}} <text>{{item.price}}元</text>
+    {{item.name}} <text class='price'>{{item.price}}元</text>
   </view>
-  </view>
+  </navigator>
   <view style='clear:left;'></view>
 </view>
 

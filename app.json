@@ -3,8 +3,8 @@
     
     "pages/index/index",
     "pages/product/product",
-    "pages/logs/logs",
-    "pages/list/list"
+    "pages/confirm/confirm",
+    "pages/logs/logs"
    
   ],
   "window": {

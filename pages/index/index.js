@@ -1,3 +1,5 @@
+var ProductService = require('../../services/ProductService.js');
+
 //index.js
 //获取应用实例
 const app = getApp()
@@ -8,10 +10,7 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    productList : [
-      {id:1,name:'猕猴桃',price:5.2},
-      {id:2,name:'榴莲',price:19.8},
-      ],
+    productList : ProductService.getList(),
   },
   //事件处理函数
   bindViewTap: function() {
@@ -62,7 +61,7 @@ Page({
   tapProduct:function(e){
     var productid = e.target.dataset["productid"];
     wx.navigateTo({
-      url: '/pages/product/product?id=1',
+      url: '/pages/product/product?id='+productid,
       success: function(res) {},
       fail: function(res) {},
       complete: function(res) {},
