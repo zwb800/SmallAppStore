@@ -7,3 +7,70 @@
   justify-content: space-between;
   box-sizing: border-box;
 } 
+
+
+
+.field{
+  background:white;
+  border-top: 1px solid #e1e1e1;
+  border-bottom: 1px solid #e1e1e1;
+  margin-bottom: 20rpx;
+  padding: 20rpx;
+}
+
+.product{
+  height: 200rpx;
+  font-size: 33rpx;
+  padding-top:20rpx;
+  padding-bottom:20rpx;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+.product:last-child{
+   border-bottom: none;
+}
+
+.product > image {
+  float:left;
+  width:200rpx;
+  height:200rpx;
+}
+
+.product > view {
+  float:left;
+  width:510rpx;
+  
+}
+
+.price{
+  font-size: 42rpx;
+   color: #e93b3d;
+   height: 80rpx;
+}
+
+.del{
+  text-align: right;
+  padding: 20rpx;
+}
+
+.counter{
+  font-size: 33rpx;
+  height:80rpx;
+  float:right;
+}
+
+.counter > view{
+  float:left;
+  background-color: #e9e9e9;
+  color: #333;
+  padding:10px 15px;
+}
+.counter > view:nth-child(2){
+  margin: 0 2px;
+  width:35rpx;
+  text-align: center;
+}
+
+.disabled{
+  background-color:#f7f7f7;
+}

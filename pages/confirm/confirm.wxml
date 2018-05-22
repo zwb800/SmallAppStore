@@ -1,24 +1,39 @@
-<view class='field'>
-<text class="recpients">张文彬 153****8135</text>
-<view class='address'>北京海淀区三环到四环之间北三环西路43号青云当代大厦3层神州视翰科技有限公司</view>
+<view class='field' bindtap='chooseAddress'>
+<text class="recpients">{{address.userName}} {{address.telNumber}}</text>
+<view class='address'>{{address.provinceName+address.cityName+address.countyName+address.detailInfo}}</view>
 </view>
 <view class='productlist field'>
-<view class='product'>
-<image src='https://img10.360buyimg.com/n4/jfs/t8212/335/867296173/346941/42857e6f/59b0afceNd7a1adfa.jpg'></image>
-<view>
-  <view class='productname'>爱奇果 新疆库尔勒香梨 总重量约2.5kg 精选特级大果 新鲜水果</view>
-  <view class='sku'>1kg</view>
-  <view class='price'>¥39.6
-    <view class='counter'>
-      <view bindtap='sub' wx:if="{{count>1}}">-</view>
-      <view style='background-color:#f7f7f7;' class='disabled' wx:else>-</view>
-      <view>{{count}}</view>
-      <view bindtap='add'>+</view>
+  <view class='product'>
+    <image src='https://img10.360buyimg.com/n4/jfs/t8212/335/867296173/346941/42857e6f/59b0afceNd7a1adfa.jpg'></image>
+    <view>
+      <view class='productname'>爱奇果 新疆库尔勒香梨 总重量约2.5kg 精选特级大果 新鲜水果</view>
+      <view class='sku'>1kg</view>
+      <view class='price'>¥39.6
+        <view class='counter'>
+          <view bindtap='sub' wx:if="{{count>1}}">-</view>
+          <view style='background-color:#f7f7f7;' class='disabled' wx:else>-</view>
+          <view>{{count}}</view>
+          <view bindtap='add'>+</view>
+        </view>
+      </view>
     </view>
   </view>
-  
-</view>
-</view>
+
+  <view class='product'>
+    <image src='https://img10.360buyimg.com/n4/jfs/t8212/335/867296173/346941/42857e6f/59b0afceNd7a1adfa.jpg'></image>
+    <view>
+      <view class='productname'>爱奇果 新疆库尔勒香梨 总重量约2.5kg 精选特级大果 新鲜水果</view>
+      <view class='sku'>1kg</view>
+      <view class='price'>¥39.6
+        <view class='counter'>
+          <view bindtap='sub' wx:if="{{count>1}}">-</view>
+          <view style='background-color:#f7f7f7;' class='disabled' wx:else>-</view>
+          <view>{{count}}</view>
+          <view bindtap='add'>+</view>
+        </view>
+      </view>
+    </view>
+  </view>
 </view>
 <view class='field'>
 配送时间：<text>16:00-18:00</text>

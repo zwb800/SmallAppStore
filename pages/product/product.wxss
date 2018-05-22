@@ -77,7 +77,7 @@ swiper{
 
 }
 
-.bottom-nav > navigator{
+.bottom-nav > navigator,.bottom-nav > view{
   float: left;
   border-radius:unset;
   width:30%;

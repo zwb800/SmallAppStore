@@ -21,7 +21,7 @@
 
 <image style='height:800rpx;width:100%;'  src='{{product.detail}}'></image>
 <view class="bottom-nav">
-<navigator class='cart' style="height:79rpx;">购物车</navigator>
-<navigator class="add_cart">加入购物车</navigator>
+<navigator class='cart' style="height:79rpx;" open-type='switchTab' url="/pages/cart/cart?id={{product.id}}">购物车</navigator>
+<view class="add_cart">加入购物车</view>
 <navigator class='btn_buy' style='width:40%' url="{{'/pages/confirm/confirm?id='+product.id}}">立即购买</navigator>
 </view>

@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    count:1
+    count:1,
+    address: { userName: "张文彬", provinceName: "北京市", cityName: "北京市", countyName: "海淀区", detailInfo:"北三环西路75号",telNumber:"1531508135"}
   },
   add:function(e){
     this.data.count++;
@@ -14,6 +15,24 @@ Page({
   sub: function (e) {
     this.data.count--;
     this.setData({ count: this.data.count });
+  },
+
+  chooseAddress:function(){
+    var $this = this;
+    wx.chooseAddress({
+      success: function (res) {
+        $this.setData({address:res});
+        console.log(res.userName)
+        console.log(res.postalCode)
+        console.log(res.provinceName)
+        console.log(res.cityName)
+        console.log(res.countyName)
+        console.log(res.detailInfo)
+        console.log(res.nationalCode)
+        console.log(res.telNumber)
+      }
+    })
+
   },
   /**
    * 生命周期函数--监听页面加载
