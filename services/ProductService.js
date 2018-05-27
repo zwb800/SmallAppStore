@@ -1,4 +1,30 @@
 
+
+module.exports.confirm = function (userid,skuid, callback) {
+  wx.request({
+    url: getApp().host + '/product/confirm',
+    data: { skuid: skuid,userid:userid },
+    success: function (data) {
+      if (callback)
+        callback(data.data);
+    }
+  })
+
+}
+module.exports.get = function(id,callback){
+wx.request({
+  url: getApp().host+'/product/getbyid',
+  data:{id:id},
+  success:function(data)
+  {
+if(callback)
+  callback(data.data);
+
+  }
+})
+
+}
+
 module.exports.getList = function (callback){
   
 wx.request({
@@ -6,7 +32,7 @@ wx.request({
   success:function(data){
     
     if(callback)
-      callback(data);
+      callback(data.data);
   },
 })
 

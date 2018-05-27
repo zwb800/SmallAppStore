@@ -8,7 +8,7 @@ Page({
   onLoad: function () {
     var $this = this;
     ProductService.getList(function(data){
-      $this.setData({ productList:data.data});
+      $this.setData({ productList:data});
     });
   },
 })

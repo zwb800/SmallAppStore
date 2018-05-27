@@ -1,27 +1,60 @@
-// pages/confirm/confirm.js
+var ProductService = require('../../services/ProductService.js');
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    count:1,
-    address: { userName: "张文彬", provinceName: "北京市", cityName: "北京市", countyName: "海淀区", detailInfo:"北三环西路75号",telNumber:"1531508135"}
+    
+  },
+  calcSum:function(){
+    var sumPrice = 0;
+    for(var i=0;i<this.data.skus.length;i++)
+    {
+      var sku = this.data.skus[i];
+      sumPrice += parseInt(sku.price*100)*sku.count/100;//js的乘除法bug 浮点乘除会出现无限循环小数
+    }
+this.setData({sumPrice:sumPrice,payPrice:(sumPrice+this.data.shippingFee)});
+
   },
   add:function(e){
-    this.data.count++;
-    this.setData({ count: this.data.count});
+    var skuid = e.target.dataset.skuid;
+    
+this.getSkuByID(skuid).count++;
+this.setData({ skus: this.data.skus });
+this.calcSum();
   },
+
   sub: function (e) {
-    this.data.count--;
-    this.setData({ count: this.data.count });
+
+    var skuid = e.target.dataset.skuid;
+    this.getSkuByID(skuid).count--;
+    this.setData({ skus: this.data.skus });
+    this.calcSum();
   },
+  getSkuByID:function(skuid)
+  {
+    for(var i=0;i<this.data.skus.length;i++){
+
+if(this.data.skus[i].id == skuid)
+{
+
+  return this.data.skus[i];
+}
+
+    }
+
+    return null;
+
+  },
+
 
   chooseAddress:function(){
     var $this = this;
     wx.chooseAddress({
       success: function (res) {
-        $this.setData({address:res});
+        $this.setData({ address: $this.data.address});
         console.log(res.userName)
         console.log(res.postalCode)
         console.log(res.provinceName)
@@ -38,7 +71,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var skuid = options.id;
+    var $this = this;
+    ProductService.confirm(1, skuid,function(data){
+for(var i=0;i<data.skus.length;i++)
+{
+data.skus[i].count = 1;
+
+}
+data.shippingFee = 5.0;
+
+$this.setData(data);
+      $this.calcSum();
+    });
   },
 
   /**

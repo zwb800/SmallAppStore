@@ -4,7 +4,7 @@
   <view class='productlist'>
   <navigator wx:key="id" wx:for="{{productList}}" url="{{'/pages/product/product?id='+item.id}}"  class="productitem">
   <image data-productid="{{item.id}}" 
-   src='{{item.imgs}}'></image>
+   src='{{item.img}}'></image>
  <view class='productname'>
     {{item.name}} <text class='price'>{{item.price}}元</text>
   </view>

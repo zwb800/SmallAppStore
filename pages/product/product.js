@@ -12,7 +12,6 @@ Page({
       price:0,
       imgs:[],
       product:null,
-      productList: ProductService.getList(),
   },
 
   /**
@@ -20,16 +19,13 @@ Page({
    */
   onLoad: function (options) {
     var productid = options.id;
-    var productList = this.data.productList;
-    for(var i=0;i<productList.length;i++)
-    {
-      if(productList[i].id == productid)
-      {
-        var product = productList[i];
-        this.setData({ product:product});
-        break;
-      }
-    }
+
+    var $this = this;
+     ProductService.get(productid,function(data){
+
+       $this.setData({ product: data,sku:data.skus[0] });
+     });
+    
   },
 
   sku_tap:function(e){
@@ -41,8 +37,20 @@ Page({
         this.data.btnCss[i] = "unselected";
       }
       this.data.btnCss[e.target.dataset.index] = "selected";
+
+var skus = this.data.product.skus;
+var sku = null;
+      for(var i=0;i<skus.length;i++)
+      {
+        if (skus[i].id == skuid)
+        {
+
+          sku = skus[i];
+        }
+      }
       this.setData({
-        btnCss:this.data.btnCss
+        btnCss:this.data.btnCss,
+        sku:sku,
       });
     }
   },
