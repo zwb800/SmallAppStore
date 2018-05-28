@@ -1,5 +1,17 @@
 
+module.exports.shippingOrder = function(userid,skus,address,callback){
+  wx.request({
+    url: getApp().host + '/product/shippingorder',
+    data: { userid:userid,skus: skus, address: address },
+    method:"POST",
+    header:{"content-type": "application/json"},
+    success: function (data) {
+      if (callback)
+        callback(data.data=="success");
+    }
+  })
 
+}
 module.exports.confirm = function (userid,skuid, callback) {
   wx.request({
     url: getApp().host + '/product/confirm',

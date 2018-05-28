@@ -36,6 +36,6 @@
  <view class='sum_fee'><view class='value'>¥{{payPrice}}</view></view> 
 
 
-<view class='btn_shipping'>货到付款</view>
-<view class='btn_wxpay'>微信支付</view>
+<view class='btn_shipping' bindtap='shippingOrder'>货到付款</view>
+<view class='btn_wxpay' bindtap='wxOrder'>微信支付</view>
 </view>

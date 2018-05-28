@@ -1,3 +1,6 @@
+var CartService = require('../../services/CartService.js');
+
+
 // pages/cart/cart.js
 Page({
 
@@ -5,21 +8,42 @@ Page({
    * 页面的初始数据
    */
   data: {
-    count: 1
+    userid: 1
   },
   add: function (e) {
-    this.data.count++;
-    this.setData({ count: this.data.count });
+    var skuid = e.target.dataset.skuid;
+
+    this.getSkuByID(skuid).count++;
+    this.setData({ skus: this.data.skus });
   },
+
   sub: function (e) {
-    this.data.count--;
-    this.setData({ count: this.data.count });
+
+    var skuid = e.target.dataset.skuid;
+    this.getSkuByID(skuid).count--;
+    this.setData({ skus: this.data.skus });
+  },
+  getSkuByID: function (skuid) {
+    for (var i = 0; i < this.data.skus.length; i++) {
+
+      if (this.data.skus[i].id == skuid) {
+
+        return this.data.skus[i];
+      }
+
+    }
+
+    return null;
+
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
+    var $this = this;
+   CartService.get(this.data.userid,function(data){
+     $this.setData({skus:data});
+   });
   },
 
   /**

@@ -1,35 +1,18 @@
 <view class='productlist field'>
-  <view class='product'>
-    <image src='https://img10.360buyimg.com/n4/jfs/t8212/335/867296173/346941/42857e6f/59b0afceNd7a1adfa.jpg'></image>
+  <view class='product' wx:for='{{skus}}'>
+   <image src='{{item.img}}'></image>
     <view>
-      <view class='productname'>爱奇果 新疆库尔勒香梨 总重量约2.5kg 精选特级大果 新鲜水果</view>
-      <view class='sku'>1kg</view>
-      <view class='price'>¥39.6
+      <view class='productname'>{{item.title}}</view>
+      <view class='sku'>{{item.skuName}}</view>
+      <view class='price'>¥{{item.price}}
       <view class='counter'>
-          <view bindtap='sub' wx:if="{{count>1}}">-</view>
-          <view class='disabled' wx:else>-</view>
-          <view>{{count}}</view>
-          <view bindtap='add'>+</view>
+          <view bindtap='sub' data-skuid="{{item.id}}" wx:if="{{item.count>1}}">-</view>
+          <view style='background-color:#f7f7f7;' class='disabled' wx:else>-</view>
+          <view>{{item.count}}</view>
+          <view bindtap='add' data-skuid="{{item.id}}">+</view>
         </view>
       </view>
-       
       <view class='del'>删除</view>
-    </view>
-  </view>
-
-  <view class='product'>
-    <image src='https://img10.360buyimg.com/n4/jfs/t8212/335/867296173/346941/42857e6f/59b0afceNd7a1adfa.jpg'></image>
-    <view>
-      <view class='productname'>爱奇果 新疆库尔勒香梨 总重量约2.5kg 精选特级大果 新鲜水果</view>
-      <view class='sku'>1kg</view>
-      <view class='price'>¥39.6
-        <view class='counter'>
-          <view bindtap='sub' wx:if="{{count>1}}">-</view>
-          <view class='disabled' wx:else>-</view>
-          <view>{{count}}</view>
-          <view bindtap='add'>+</view>
-        </view>
-      </view>
     </view>
   </view>
 </view>

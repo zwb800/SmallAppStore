@@ -1,4 +1,5 @@
 var ProductService = require('../../services/ProductService.js');
+var CartService = require('../../services/CartService.js');
 
 // pages/product/product.js
 Page({
@@ -7,11 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    btnCss: ['selected',"unselected"],
-      productName:'',
-      price:0,
-      imgs:[],
-      product:null,
+    btnCss: ['selected', "unselected", "unselected", "unselected", "unselected", "unselected"],
+    userid:1,
   },
 
   /**
@@ -55,11 +53,19 @@ var sku = null;
     }
   },
 
-  tapBuy:function(e){
-    wx.navigateTo({
-      url: '/pages/confirm/confirm?id='+this.data.product.id,
-    });
+  addCart:function(e){
+    debugger;
+   CartService.add(this.data.userid,this.data.sku.id,function(success){
+if(success)
+{
+  wx.showToast({
+    title: '已添加到购物车',
+  });
+}
+
+   });
   },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成

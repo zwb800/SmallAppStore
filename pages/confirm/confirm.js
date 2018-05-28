@@ -6,7 +6,28 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+    userid:1,
+  },
+  shippingOrder:function(){
+
+    ProductService.shippingOrder(this.data.userid,this.data.skus,this.data.address,function(success){
+      if(success)
+      {
+        wx.showModal({
+          title: '订单',
+          content: '下单成功！',
+          showCancel:false,
+          success: function (res) {
+            if (res.confirm) {
+              wx.navigateBack({
+                delta: 10
+              });        
+            }
+          }
+        });
+      }
+
+    });
   },
   calcSum:function(){
     var sumPrice = 0;
@@ -73,7 +94,7 @@ if(this.data.skus[i].id == skuid)
   onLoad: function (options) {
     var skuid = options.id;
     var $this = this;
-    ProductService.confirm(1, skuid,function(data){
+    ProductService.confirm(this.data.userid, skuid,function(data){
 for(var i=0;i<data.skus.length;i++)
 {
 data.skus[i].count = 1;
