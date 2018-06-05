@@ -12,7 +12,7 @@
           <view bindtap='add' data-skuid="{{item.id}}">+</view>
         </view>
       </view>
-      <view class='del'>删除</view>
+      <view class='del' data-skuid="{{item.id}}" bindtap='delete'>删除</view>
     </view>
   </view>
 </view>

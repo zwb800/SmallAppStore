@@ -10,18 +10,31 @@ Page({
   data: {
     userid: 1
   },
+  delete:function(e){
+    var skuid = e.target.dataset.skuid;
+    var $this = this;
+    CartService.delete(this.data.userid,skuid,function(data){
+if(data=="success")
+{
+  $this.onLoad();
+}
+
+    });
+  },
   add: function (e) {
     var skuid = e.target.dataset.skuid;
-
-    this.getSkuByID(skuid).count++;
+    var sku = this.getSkuByID(skuid);
+    sku.count++;
     this.setData({ skus: this.data.skus });
+    CartService.update(this.data.userid, sku.id, sku.count);
   },
 
   sub: function (e) {
-
     var skuid = e.target.dataset.skuid;
-    this.getSkuByID(skuid).count--;
+    var sku = this.getSkuByID(skuid);
+    sku.count--;
     this.setData({ skus: this.data.skus });
+    CartService.update(this.data.userid,sku.id,sku.count);
   },
   getSkuByID: function (skuid) {
     for (var i = 0; i < this.data.skus.length; i++) {

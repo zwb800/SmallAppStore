@@ -54,7 +54,6 @@ var sku = null;
   },
 
   addCart:function(e){
-    debugger;
    CartService.add(this.data.userid,this.data.sku.id,function(success){
 if(success)
 {
