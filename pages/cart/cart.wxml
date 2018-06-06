@@ -1,5 +1,7 @@
 <view class='productlist field'>
   <view class='product' wx:for='{{skus}}'>
+  <checkbox-group  bindchange="cbxChange" data-id="{{item.id}}">  <checkbox value='selected' ></checkbox></checkbox-group>
+
    <image src='{{item.img}}'></image>
     <view>
       <view class='productname'>{{item.title}}</view>
@@ -15,4 +17,10 @@
       <view class='del' data-skuid="{{item.id}}" bindtap='delete'>删除</view>
     </view>
   </view>
+</view>
+<view class="bottom-nav">
+
+<view class="remove" bindtap='removeSelected'>删除</view>
+<view></view>
+<view class='btn_buy' style='width:40%' bindtap='buy'>立即购买</view>
 </view>

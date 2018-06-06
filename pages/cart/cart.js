@@ -8,7 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userid: 1
+    userid: 1,
+    selected:new Array()
   },
   delete:function(e){
     var skuid = e.target.dataset.skuid;
@@ -48,6 +49,54 @@ if(data=="success")
 
     return null;
 
+  },
+
+  cbxChange:function(e){
+    var id = e.currentTarget.dataset.id;
+    if(e.detail.value == "selected"){
+      this.data.selected.push(id);
+    }
+    else{
+      for(var i=0;i<this.data.selected.length;i++)
+      {
+        if(this.data.selected[i]== id)
+        {
+          delete this.data.selected[i];
+        }
+
+      }
+    }
+
+  },
+  removeSelected:function(e){
+    var $this = this;
+    for(var i=0;i<this.data.selected.length;i++)
+    {
+        if(this.data.selected[i]!=undefined)
+        {
+          var skuid = this.data.selected[i];
+          CartService.delete(this.data.userid, skuid, function (data) {
+            if (data == "success" && i==$this.data.selected.length) {
+              $this.onLoad();
+            }
+
+          });
+        }
+    }
+    
+   
+  },
+
+  buy:function(){
+    var skuids="";
+    for (var i = 0; i < this.data.selected.length; i++) {
+      if (this.data.selected[i] != undefined) {
+skuids+=""+this.data.selected[i]+",";
+      }
+      }
+      wx.navigateTo({
+        url: '/pages/confirm/confirm?id='+skuids,
+      })
   },
   /**
    * 生命周期函数--监听页面加载

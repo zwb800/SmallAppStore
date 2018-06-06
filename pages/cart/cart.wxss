@@ -5,3 +5,17 @@ page{
 .product{
   height: 270rpx;
   }
+
+  checkbox{
+    float:left;
+    margin-top: 100rpx;
+  }
+.remove{
+  display: initial;
+  background-color: #efc532;
+}
+
+.product > view {
+  width:450rpx;
+
+}

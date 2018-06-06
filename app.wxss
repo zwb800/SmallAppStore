@@ -74,3 +74,28 @@
 .disabled{
   background-color:#f7f7f7;
 }
+
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  padding-left: 100rpt;
+  background:white;
+
+}
+
+.bottom-nav > navigator,.bottom-nav > view{
+  float: left;
+  border-radius:unset;
+  width:30%;
+  text-align: center;
+  height:80rpx;
+  padding-top:30rpx;
+}
+
+.btn_buy{
+  display: initial;
+  background-color: #f23030;
+  color: white;
+  width: 40%;
+}

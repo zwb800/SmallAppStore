@@ -1,3 +1,5 @@
+var UserService = require('../../services/UserService.js');
+
 // pages/my/my.js
 Page({
 
@@ -5,14 +7,18 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+  userid:1,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+var $this = this;
+UserService.get(this.data.userid,function(data){
+$this.setData({orders:data});
+
+});
   },
 
   /**
