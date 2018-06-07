@@ -1,5 +1,5 @@
 <view class='productlist field'>
-  <view class='product' wx:for='{{skus}}'>
+  <view class='product' wx:key="id"  wx:for='{{skus}}'>
   <checkbox-group  bindchange="cbxChange" data-id="{{item.id}}">  <checkbox value='selected' ></checkbox></checkbox-group>
 
    <image src='{{item.img}}'></image>
@@ -19,8 +19,7 @@
   </view>
 </view>
 <view class="bottom-nav">
-
-<view class="remove" bindtap='removeSelected'>删除</view>
 <view></view>
+<view class="remove" bindtap='removeSelected'>删除</view>
 <view class='btn_buy' style='width:40%' bindtap='buy'>立即购买</view>
 </view>

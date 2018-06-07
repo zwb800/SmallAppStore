@@ -1,52 +1,26 @@
 
-module.exports.shippingOrder = function(userid,skus,address,callback){
+module.exports.shippingOrder = function(skus,address,callback){
   wx.request({
     url: getApp().host + '/product/shippingorder',
-    data: { userid:userid,skus: skus, address: address },
+    data: { userid: getApp().userid,skus: skus, address: address },
     method:"POST",
     header:{"content-type": "application/json"},
     success: function (data) {
       if (callback)
         callback(data.data=="success");
     }
-  })
-
+  });
 }
-module.exports.confirm = function (userid,skuid, callback) {
-  wx.request({
-    url: getApp().host + '/product/confirm',
-    data: { skuid: skuid,userid:userid },
-    success: function (data) {
-      if (callback)
-        callback(data.data);
-    }
-  })
-
+module.exports.confirm = function (skuid, callback) {
+  module.exports.request("confirm", { skuid: skuid }, callback);
 }
 module.exports.get = function(id,callback){
-wx.request({
-  url: getApp().host+'/product/getbyid',
-  data:{id:id},
-  success:function(data)
-  {
-if(callback)
-  callback(data.data);
-
-  }
-})
-
+  module.exports.request("getbyid", {id:id}, callback);
 }
 
 module.exports.getList = function (callback){
-  
-wx.request({
-  url: getApp().host +'/product/',
-  success:function(data){
-    
-    if(callback)
-      callback(data.data);
-  },
-})
+  module.exports.request("", {}, callback);
+
 
  var  data = [
     { id: 1, name: '红心火龙果', price: 45.9, img: 'https://img10.360buyimg.com/n7/jfs/t3118/197/229364904/200600/37296076/57ab28ceNf76fe40f.jpg' },
@@ -62,3 +36,16 @@ wx.request({
   ];
 }
 
+module.exports.request = function (url, data, callback) {
+
+  data.userid = getApp().userid;
+  wx.request({
+    url: getApp().host + '/product/' + url,
+    data: data,
+    success: function (data) {
+      if (callback)
+        callback(data.data);
+    }
+  });
+
+}

@@ -1,8 +1,10 @@
 module.exports.get = function (userid, callback) {
-  module.exports.request("index", { userid: userid }, callback);
+  module.exports.request("index", { }, callback);
 }
 
 module.exports.request = function (url, data, callback) {
+
+  data.userid = getApp().userid;
   wx.request({
     url: getApp().host + '/user/' + url,
     data: data,

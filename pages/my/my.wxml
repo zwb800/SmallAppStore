@@ -1,11 +1,11 @@
-<view class='order field' wx:for-item="order" wx:for='{{orders}}'>
+<view class='order field' wx:key="id"  wx:for-item="order" wx:for='{{orders}}'>
 <view class="order_info" >订单号: {{order.id}} 
  <view class='sum_price'>总价: <text class='price'>¥39.6</text></view>
  <view class='status'>状态: <text wx:if="{{order.status==0}}">等待发货</text>
  <text wx:elif="{{order.status==1}}">正在派送</text>
   <text wx:elif="{{order.status==2}}">已收货</text>
  </view>
-<view class='product' wx:for-item="sku" wx:for='{{order.skus}}'>
+<view class='product' wx:key="id"  wx:for-item="sku" wx:for='{{order.skus}}'>
     <image src='{{sku.img}}'></image>
         <view class='productname'>{{sku.title}}</view>
         <view class='sku'>{{sku.skuName}}</view>

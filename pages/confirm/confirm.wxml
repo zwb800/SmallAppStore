@@ -3,7 +3,7 @@
 <view class='address'>{{address.provinceName+address.cityName+address.countyName+address.detailInfo}}</view>
 </view>
 <view class='productlist field'>
-  <view class='product' wx:for='{{skus}}'>
+  <view class='product' wx:key="id"  wx:for='{{skus}}'>
     <image src='{{item.img}}'></image>
     <view>
       <view class='productname'>{{item.title}}</view>

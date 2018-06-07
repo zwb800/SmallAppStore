@@ -8,13 +8,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userid: 1,
     selected:new Array()
   },
   delete:function(e){
     var skuid = e.target.dataset.skuid;
     var $this = this;
-    CartService.delete(this.data.userid,skuid,function(data){
+    CartService.delete(skuid,function(data){
 if(data=="success")
 {
   $this.onLoad();
@@ -27,7 +26,7 @@ if(data=="success")
     var sku = this.getSkuByID(skuid);
     sku.count++;
     this.setData({ skus: this.data.skus });
-    CartService.update(this.data.userid, sku.id, sku.count);
+    CartService.update( sku.id, sku.count);
   },
 
   sub: function (e) {
@@ -35,7 +34,7 @@ if(data=="success")
     var sku = this.getSkuByID(skuid);
     sku.count--;
     this.setData({ skus: this.data.skus });
-    CartService.update(this.data.userid,sku.id,sku.count);
+    CartService.update(sku.id,sku.count);
   },
   getSkuByID: function (skuid) {
     for (var i = 0; i < this.data.skus.length; i++) {
@@ -75,7 +74,7 @@ if(data=="success")
         if(this.data.selected[i]!=undefined)
         {
           var skuid = this.data.selected[i];
-          CartService.delete(this.data.userid, skuid, function (data) {
+          CartService.delete(skuid, function (data) {
             if (data == "success" && i==$this.data.selected.length) {
               $this.onLoad();
             }
@@ -103,7 +102,7 @@ skuids+=""+this.data.selected[i]+",";
    */
   onLoad: function (options) {
     var $this = this;
-   CartService.get(this.data.userid,function(data){
+   CartService.get(function(data){
      $this.setData({skus:data});
    });
   },

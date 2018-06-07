@@ -6,11 +6,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userid:1,
   },
   shippingOrder:function(){
 
-    ProductService.shippingOrder(this.data.userid,this.data.skus,this.data.address,function(success){
+    ProductService.shippingOrder(this.data.skus,this.data.address,function(success){
       if(success)
       {
         wx.showModal({
@@ -94,7 +93,7 @@ if(this.data.skus[i].id == skuid)
   onLoad: function (options) {
     var skuid = options.id;
     var $this = this;
-    ProductService.confirm(this.data.userid, skuid,function(data){
+    ProductService.confirm( skuid,function(data){
 for(var i=0;i<data.skus.length;i++)
 {
 data.skus[i].count = 1;
