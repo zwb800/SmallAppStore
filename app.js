@@ -1,6 +1,6 @@
 //app.js
 App({
-  host:"http://localhost:50325",
+  host:"https://www.xianpinduo.cn",
   userid:0,
   onLaunch: function () {
     // 展示本地存储能力
