@@ -15,7 +15,7 @@
 
   <view class='skus field' style='margin-bottom:0' bindtap='sku_tap'>
     <text>规格</text>
-    <text class='sku {{btnCss[index]}}' data-skuid="{{item.id}}" data-index="{{index}}" wx:key="id" wx:for="{{product.skus}}">{{item.name}}</text>
+    <text class='sku {{btnCss[index]}}' data-skuid="{{item._id}}" data-index="{{index}}" wx:key="_id" wx:for="{{product.skus}}">{{item.name}}</text>
   </view>
 </view>
 
@@ -23,5 +23,5 @@
 <view class="bottom-nav">
 <navigator class='cart' style="height:79rpx;" open-type='switchTab' url="/pages/cart/cart?id={{product.id}}">购物车</navigator>
 <view class="add_cart" bindtap='addCart'>加入购物车</view>
-<navigator class='btn_buy' style='width:40%' url="{{'/pages/confirm/confirm?id='+sku.id}}">立即购买</navigator>
+<navigator class='btn_buy' style='width:40%' url="{{'/pages/confirm/confirm?id='+sku._id}}">立即购买</navigator>
 </view>

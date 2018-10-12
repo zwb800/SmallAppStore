@@ -17,10 +17,8 @@ Page({
    */
   onLoad: function (options) {
     var productid = options.id;
-
     var $this = this;
      ProductService.get(productid,function(data){
-
        $this.setData({ product: data,sku:data.skus[0] });
      });
     
@@ -40,7 +38,7 @@ var skus = this.data.product.skus;
 var sku = null;
       for(var i=0;i<skus.length;i++)
       {
-        if (skus[i].id == skuid)
+        if (skus[i]._id == skuid)
         {
 
           sku = skus[i];

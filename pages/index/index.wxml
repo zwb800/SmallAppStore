@@ -2,7 +2,7 @@
 <view class="container" style=''>
   <input class="search" style="display:none;" type='text' placeholder='搜索' placeholder-style='text-align:center' ></input>
   <view class='productlist'>
-  <navigator wx:key="id" wx:for="{{productList}}" url="{{'/pages/product/product?id='+item.id}}"  class="productitem">
+  <navigator wx:key="id" wx:for="{{productList}}" url="{{'/pages/product/product?id='+item._id}}"  class="productitem">
   <image data-productid="{{item.id}}" 
    src='{{item.img}}'></image>
  <view class='productname'>
