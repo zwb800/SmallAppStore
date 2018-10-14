@@ -9,6 +9,10 @@ Page({
     var $this = this;
     ProductService.getList(function(data){
       $this.setData({ productList:data});
+      wx.stopPullDownRefresh();
     });
+  },
+  onPullDownRefresh: function () {
+    this.onLoad();
   },
 })

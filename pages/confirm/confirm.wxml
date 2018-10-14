@@ -1,4 +1,4 @@
-<view class='field' bindtap='chooseAddress'>
+<view class='field' bindtap='chooseAddress' wx:if="{{address!=null}}">
 <text class="recpients">{{address.userName}} {{address.telNumber}}</text>
 <view class='address'>{{address.provinceName+address.cityName+address.countyName+address.detailInfo}}</view>
 </view>

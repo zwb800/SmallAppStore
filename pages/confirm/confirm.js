@@ -7,6 +7,13 @@ Page({
    */
   data: {
   },
+  wxOrder:function(){
+    wx.showModal({
+      title: '暂未开通，敬请期待',
+      showCancel:false,
+    })
+
+  },
   shippingOrder:function(){
 
     ProductService.shippingOrder(this.data.skus,this.data.address,function(success){
@@ -74,15 +81,7 @@ if(this.data.skus[i].id == skuid)
     var $this = this;
     wx.chooseAddress({
       success: function (res) {
-        $this.setData({ address: $this.data.address});
-        console.log(res.userName)
-        console.log(res.postalCode)
-        console.log(res.provinceName)
-        console.log(res.cityName)
-        console.log(res.countyName)
-        console.log(res.detailInfo)
-        console.log(res.nationalCode)
-        console.log(res.telNumber)
+        $this.setData({ address: res});
       }
     })
 
@@ -94,16 +93,30 @@ if(this.data.skus[i].id == skuid)
     var skuid = options.id;
     var $this = this;
     ProductService.confirm( skuid,function(data){
-for(var i=0;i<data.skus.length;i++)
-{
-data.skus[i].count = 1;
+        for(var i=0;i<data.skus.length;i++)
+        {
+          data.skus[i].count = 1;
+        }
 
-}
-data.shippingFee = 5.0;
+        data.shippingFee = 5.0;
 
-$this.setData(data);
-      $this.calcSum();
-    });
+        $this.setData(data);
+        $this.calcSum();
+
+        if(data.address==null)
+        {
+          wx.showModal({
+            title: '请先设置收货地址',
+            // content: '下单成功！',
+            showCancel: false,
+            success: function (res) {
+              if (res.confirm) {
+                $this.chooseAddress();
+              }
+            }
+          });
+        }
+      });
   },
 
   /**

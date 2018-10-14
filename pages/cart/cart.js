@@ -16,7 +16,7 @@ Page({
     CartService.delete(skuid,function(data){
 if(data=="success")
 {
-  $this.onLoad();
+  $this.onShow();
 }
 
     });
@@ -76,7 +76,7 @@ if(data=="success")
           var skuid = this.data.selected[i];
           CartService.delete(skuid, function (data) {
             if (data == "success" && i==$this.data.selected.length) {
-              $this.onLoad();
+              $this.onShow();
             }
 
           });
@@ -101,10 +101,7 @@ skuids+=""+this.data.selected[i]+",";
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var $this = this;
-   CartService.get(function(data){
-     $this.setData({skus:data});
-   });
+
   },
 
   /**
@@ -118,7 +115,11 @@ skuids+=""+this.data.selected[i]+",";
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    var $this = this;
+    CartService.get(function (data) {
+      $this.setData({ skus: data });
+      wx.stopPullDownRefresh();
+    });
   },
 
   /**
@@ -139,7 +140,7 @@ skuids+=""+this.data.selected[i]+",";
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+  this.onShow();
   },
 
   /**
