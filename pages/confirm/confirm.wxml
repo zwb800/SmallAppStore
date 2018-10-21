@@ -4,9 +4,9 @@
 </view>
 <view class='productlist field'>
   <view class='product' wx:key="id"  wx:for='{{skus}}'>
-    <image src='{{item.img}}'></image>
+    <image src='{{item.product.img}}'></image>
     <view>
-      <view class='productname'>{{item.title}}</view>
+      <view class='productname'>{{item.product.title}}</view>
       <view class='sku'>{{item.skuName}}</view>
       <view class='price'>¥{{item.price}}
         <view class='counter'>

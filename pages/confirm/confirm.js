@@ -8,10 +8,28 @@ Page({
   data: {
   },
   wxOrder:function(){
-    wx.showModal({
-      title: '暂未开通，敬请期待',
-      showCancel:false,
-    })
+    // wx.showModal({
+    //   title: '暂未开通，敬请期待',
+    //   showCancel:false,
+    // })
+
+    ProductService.wxPay(this.data.skus, this.data.address,this.data.shippingFee, function (success) {
+      if (success) {
+        wx.showModal({
+          title: '订单',
+          content: '下单成功！',
+          showCancel: false,
+          success: function (res) {
+            if (res.confirm) {
+              wx.navigateBack({
+                delta: 10
+              });
+            }
+          }
+        });
+      }
+
+    });
 
   },
   shippingOrder:function(){
@@ -99,7 +117,6 @@ if(this.data.skus[i].id == skuid)
         }
 
         data.shippingFee = 5.0;
-
         $this.setData(data);
         $this.calcSum();
 

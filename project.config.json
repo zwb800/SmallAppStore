@@ -1,14 +1,15 @@
 {
 	"description": "项目配置文件。",
+	"cloudfunctionRoot": "functions/",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.2.3",
+	"libVersion": "2.3.0",
 	"appid": "wxd386c7dc2ba5ab39",
 	"projectname": "Store",
 	"isGameTourist": false,
