@@ -11,35 +11,35 @@ Page({
     selected:new Array()
   },
   delete:function(e){
-    var skuid = e.target.dataset.skuid;
+    var id = e.target.dataset.id;
     var $this = this;
-    CartService.delete(skuid,function(data){
-if(data=="success")
-{
-  $this.onShow();
-}
+    CartService.delete(id,function(success){
+      if (success)
+      {
+        $this.onShow();
+      }
 
     });
   },
   add: function (e) {
-    var skuid = e.target.dataset.skuid;
-    var sku = this.getSkuByID(skuid);
+    var id = e.target.dataset.id;
+    var sku = this.getSkuByID(id);
     sku.count++;
     this.setData({ skus: this.data.skus });
-    CartService.update( sku.id, sku.count);
+    CartService.update( sku._id, sku.count);
   },
 
   sub: function (e) {
-    var skuid = e.target.dataset.skuid;
-    var sku = this.getSkuByID(skuid);
+    var id = e.target.dataset.id;
+    var sku = this.getSkuByID(id);
     sku.count--;
     this.setData({ skus: this.data.skus });
-    CartService.update(sku.id,sku.count);
+    CartService.update(sku._id,sku.count);
   },
-  getSkuByID: function (skuid) {
+  getSkuByID: function (id) {
     for (var i = 0; i < this.data.skus.length; i++) {
 
-      if (this.data.skus[i].id == skuid) {
+      if (this.data.skus[i]._id == id) {
 
         return this.data.skus[i];
       }
@@ -60,11 +60,13 @@ if(data=="success")
       {
         if(this.data.selected[i]== id)
         {
-          delete this.data.selected[i];
+          this.data.selected.splice(i,1);
         }
 
       }
     }
+
+    this.setData({ selected:this.data.selected});
 
   },
   removeSelected:function(e){
@@ -73,9 +75,9 @@ if(data=="success")
     {
         if(this.data.selected[i]!=undefined)
         {
-          var skuid = this.data.selected[i];
-          CartService.delete(skuid, function (data) {
-            if (data == "success" && i==$this.data.selected.length) {
+          var id = this.data.selected[i];
+          CartService.delete(id, function (data) {
+            if (data && i==$this.data.selected.length) {
               $this.onShow();
             }
 
@@ -90,12 +92,14 @@ if(data=="success")
     var skuids="";
     for (var i = 0; i < this.data.selected.length; i++) {
       if (this.data.selected[i] != undefined) {
-skuids+=""+this.data.selected[i]+",";
+        var sku = this.getSkuByID(this.data.selected[i]);
+        skuids += "" + sku.sku_id+",";
       }
-      }
-      wx.navigateTo({
-        url: '/pages/confirm/confirm?id='+skuids,
-      })
+    }
+
+    wx.navigateTo({
+      url: '/pages/confirm/confirm?id='+skuids,
+    })
   },
   /**
    * 生命周期函数--监听页面加载

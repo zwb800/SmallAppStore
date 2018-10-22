@@ -14,6 +14,11 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+
+
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  orderStatus:{等待支付:0,已支付:1,已发货:2,已收货:3}
 }
+
+

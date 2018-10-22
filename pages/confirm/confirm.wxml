@@ -7,13 +7,13 @@
     <image src='{{item.product.img}}'></image>
     <view>
       <view class='productname'>{{item.product.title}}</view>
-      <view class='sku'>{{item.skuName}}</view>
+      <view class='sku'>{{item.name}}</view>
       <view class='price'>¥{{item.price}}
         <view class='counter'>
-          <view bindtap='sub' data-skuid="{{item.id}}" wx:if="{{item.count>1}}">-</view>
+          <view bindtap='sub' data-skuid="{{item._id}}" wx:if="{{item.count>1}}">-</view>
           <view style='background-color:#f7f7f7;' class='disabled' wx:else>-</view>
           <view>{{item.count}}</view>
-          <view bindtap='add' data-skuid="{{item.id}}">+</view>
+          <view bindtap='add' data-skuid="{{item._id}}">+</view>
         </view>
       </view>
     </view>
@@ -36,6 +36,7 @@
  <view class='sum_fee'><view class='value'>¥{{payPrice}}</view></view> 
 
 
-<view class='btn_shipping' bindtap='shippingOrder'>货到付款</view>
+
 <view class='btn_wxpay' bindtap='wxOrder'>微信支付</view>
+<!-- <view class='btn_shipping' bindtap='shippingOrder'>货到付款</view> -->
 </view>

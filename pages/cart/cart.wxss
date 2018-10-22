@@ -16,6 +16,6 @@ page{
 }
 
 .product > view {
-  width:450rpx;
+  width:430rpx;
 
 }

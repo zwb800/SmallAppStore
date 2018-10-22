@@ -16,6 +16,7 @@ Page({
   onLoad: function (options) {
 var $this = this;
 UserService.get(this.data.userid,function(data){
+  console.log(data);
 $this.setData({orders:data});
 
 });

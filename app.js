@@ -2,6 +2,7 @@
 App({
   host:"https://www.xianpinduo.cn",
   userid:0,
+  openid:null,
   onLaunch: function () {
     wx.cloud.init();
     // 展示本地存储能力
@@ -14,10 +15,19 @@ App({
       name: 'login',
       success: function (res) {
         console.log(res.result.openId)
-        db.collection("User").where({OpenId:res.result.openId}).get({success:function(data){
-          getApp().userid = data.data[0]._id;
-          console.log(getApp().userid);
-        }});
+        getApp().openid = res.result.openId;
+        // db.collection("User").where({_openid:res.result.openId}).get({success:function(data){
+        //   if(data.data.length ==0)
+        //   {
+        //     db.collection("User").add({ data: { },success:function(data2){
+        //       getApp().userid = data2._id;
+        //     }});
+        //   }
+        //   else{
+        //     getApp().userid = data.data[0]._id;
+        //   } 
+          
+        // }});
       },
       fail: console.error
     })

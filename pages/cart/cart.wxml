@@ -1,25 +1,27 @@
 <view class='productlist field'>
-  <view class='product' wx:key="id"  wx:for='{{skus}}'>
-  <checkbox-group  bindchange="cbxChange" data-id="{{item.id}}">  <checkbox value='selected' ></checkbox></checkbox-group>
+  <view class='product' wx:key="_id"  wx:for='{{skus}}'>
+  <checkbox-group  bindchange="cbxChange" data-id="{{item._id}}">  <checkbox value='selected' ></checkbox></checkbox-group>
 
-   <image src='{{item.img}}'></image>
+   <image src='{{item.sku.product.img}}'></image>
     <view>
-      <view class='productname'>{{item.title}}</view>
-      <view class='sku'>{{item.skuName}}</view>
-      <view class='price'>¥{{item.price}}
+      <view class='productname'>{{item.sku.product.title}}</view>
+      <view class='sku'>{{item.sku.name}}</view>
+      <view class='price'>¥{{item.sku.price}}
       <view class='counter'>
-          <view bindtap='sub' data-skuid="{{item.id}}" wx:if="{{item.count>1}}">-</view>
+          <view bindtap='sub' data-id="{{item._id}}" wx:if="{{item.count>1}}">-</view>
           <view style='background-color:#f7f7f7;' class='disabled' wx:else>-</view>
           <view>{{item.count}}</view>
-          <view bindtap='add' data-skuid="{{item.id}}">+</view>
+          <view bindtap='add' data-id="{{item._id}}">+</view>
         </view>
       </view>
-      <view class='del' data-skuid="{{item.id}}" bindtap='delete'>删除</view>
+      <view class='del' data-id="{{item._id}}" bindtap='delete'>删除</view>
     </view>
   </view>
 </view>
 <view class="bottom-nav">
 <view></view>
-<view class="remove" bindtap='removeSelected'>删除</view>
-<view class='btn_buy' style='width:40%' bindtap='buy'>立即购买</view>
+<view class="remove" bindtap='removeSelected' wx:if="{{selected.length>0}}">删除</view>
+<view class="remove disabled" wx:else>删除</view>
+<view class='btn_buy' style='width:40%' bindtap='buy' wx:if="{{selected.length>0}}">立即购买</view>
+<view class='btn_buy disabled' style='width:40%;' wx:else>立即购买</view>
 </view>

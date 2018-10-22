@@ -52,7 +52,7 @@ var sku = null;
   },
 
   addCart:function(e){
-   CartService.add(this.data.sku.id,function(success){
+   CartService.add(this.data.sku._id,function(success){
 if(success)
 {
   wx.showToast({

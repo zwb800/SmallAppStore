@@ -21,8 +21,8 @@ Page({
           showCancel: false,
           success: function (res) {
             if (res.confirm) {
-              wx.navigateBack({
-                delta: 10
+              wx.switchTab({
+                url: '/pages/my/my',
               });
             }
           }
@@ -65,7 +65,6 @@ this.setData({sumPrice:sumPrice,payPrice:(sumPrice+this.data.shippingFee)});
   },
   add:function(e){
     var skuid = e.target.dataset.skuid;
-    
 this.getSkuByID(skuid).count++;
 this.setData({ skus: this.data.skus });
 this.calcSum();
@@ -82,7 +81,7 @@ this.calcSum();
   {
     for(var i=0;i<this.data.skus.length;i++){
 
-if(this.data.skus[i].id == skuid)
+if(this.data.skus[i]._id == skuid)
 {
 
   return this.data.skus[i];
@@ -111,12 +110,8 @@ if(this.data.skus[i].id == skuid)
     var skuid = options.id;
     var $this = this;
     ProductService.confirm( skuid,function(data){
-        for(var i=0;i<data.skus.length;i++)
-        {
-          data.skus[i].count = 1;
-        }
 
-        data.shippingFee = 5.0;
+        
         $this.setData(data);
         $this.calcSum();
 
