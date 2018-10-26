@@ -17,9 +17,15 @@ Page({
    */
   onLoad: function (options) {
     var productid = options.id;
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
+
     var $this = this;
      ProductService.get(productid,function(data){
        $this.setData({ product: data,sku:data.skus[0] });
+       wx.hideLoading();
      });
     
   },

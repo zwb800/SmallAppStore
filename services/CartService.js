@@ -41,48 +41,45 @@ module.exports.add = function (skuid, callback) {
 
 module.exports.get = function ( callback) {
   const db = wx.cloud.database();
-  db.collection("Cart").get({success:function(data){
-    var carts = data.data;
+  var carts = null;
+  db.collection("Cart").get().then(data=>{
+    carts = data.data;
     var skuids = new Array();
     for (var i = 0; i < carts.length; i++) {
       skuids.push(carts[i].sku_id);
     }
 
-    db.collection("Sku").where({ _id: db.command.in(skuids) }).get({
-      success: function (data) {
-        var skus = data.data;
-        var productids = new Array();
-        for (var i = 0; i < skus.length; i++) {
-          var sku = skus[i]
-          productids.push(sku.product_id);
-          for (var j = 0; j < carts.length; j++) {
-            if (carts[j].sku_id == sku._id)
-            {
-              carts[j].sku = sku;
-              break;
-            }
-          }
+    return db.collection("Sku").where({ _id: db.command.in(skuids) }).get();
+  })
+  .then(data=>{
+    var skus = data.data;
+    var productids = new Array();
+    for (var i = 0; i < skus.length; i++) {
+      var sku = skus[i]
+      productids.push(sku.product_id);
+      for (var j = 0; j < carts.length; j++) {
+        if (carts[j].sku_id == sku._id) {
+          carts[j].sku = sku;
+          break;
         }
-
-        //导入的_id查询不到 微信bug
-        db.collection("Product").where({ _id: db.command.in(productids) }).get({
-          success: function (data2) {
-            var products = data2.data;
-            for (var i = 0; i < carts.length; i++) {
-              var c = carts[i];
-              for (var j = 0; i < products.length; j++) {
-                var product = products[j];
-                if (c.sku.product_id == product._id) {
-                  c.sku.product = product;
-                  break;
-                }
-              }
-            }
-            callback(carts);
-          }
-        });
-
       }
-    });
-  }});
+    }
+
+    //导入的_id查询不到 微信bug
+    return db.collection("Product").where({ _id: db.command.in(productids) }).field({img:true,title:true}).get();
+  })
+  .then(data=>{
+    var products = data.data;
+    for (var i = 0; i < carts.length; i++) {
+      var c = carts[i];
+      for (var j = 0; j < products.length; j++) {
+        var product = products[j];
+        if (c.sku.product_id == product._id) {
+          c.sku.product = product;
+          break;
+        }
+      }
+    }
+    callback(carts);
+  })
 }

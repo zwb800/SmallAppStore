@@ -98,7 +98,7 @@ Page({
     }
 
     wx.navigateTo({
-      url: '/pages/confirm/confirm?id='+skuids,
+      url: '/pages/confirm/confirm?cart=1&id='+skuids,
     })
   },
   /**
@@ -119,10 +119,24 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
+    this.setData({
+      skus: []});
     var $this = this;
     CartService.get(function (data) {
-      $this.setData({ skus: data });
+      
       wx.stopPullDownRefresh();
+      wx.hideLoading();
+      $this.data.selected = [];
+      for(var i=0;i<data.length;i++)
+      {
+        $this.data.selected.push(data[i]._id);
+      }
+
+      $this.setData({ skus: data, selected: $this.data.selected });
     });
   },
 

@@ -1,6 +1,6 @@
 <view class='productlist field'>
   <view class='product' wx:key="_id"  wx:for='{{skus}}'>
-  <checkbox-group  bindchange="cbxChange" data-id="{{item._id}}">  <checkbox value='selected' ></checkbox></checkbox-group>
+  <checkbox-group  bindchange="cbxChange" data-id="{{item._id}}">  <checkbox checked='true' value='selected' ></checkbox></checkbox-group>
 
    <image src='{{item.sku.product.img}}'></image>
     <view>

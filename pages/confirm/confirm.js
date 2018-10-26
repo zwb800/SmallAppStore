@@ -1,4 +1,4 @@
-var ProductService = require('../../services/ProductService.js');
+var ConfirmService = require('../../services/ConfirmService.js');
 
 Page({
 
@@ -6,14 +6,16 @@ Page({
    * 页面的初始数据
    */
   data: {
+    
   },
+  
   wxOrder:function(){
-    // wx.showModal({
-    //   title: '暂未开通，敬请期待',
-    //   showCancel:false,
-    // })
-
-    ProductService.wxPay(this.data.skus, this.data.address,this.data.shippingFee, function (success) {
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
+    ConfirmService.wxPay(this.data.skus, this.data.address,this.data.shippingFee, function (success) {
+      wx.hideLoading();
       if (success) {
         wx.showModal({
           title: '订单',
@@ -34,7 +36,7 @@ Page({
   },
   shippingOrder:function(){
 
-    ProductService.shippingOrder(this.data.skus,this.data.address,function(success){
+    ConfirmService.shippingOrder(this.data.skus,this.data.address,function(success){
       if(success)
       {
         wx.showModal({
@@ -60,18 +62,17 @@ Page({
       var sku = this.data.skus[i];
       sumPrice += parseInt(sku.price*100)*sku.count/100;//js的乘除法bug 浮点乘除会出现无限循环小数
     }
-this.setData({sumPrice:sumPrice,payPrice:(sumPrice+this.data.shippingFee)});
+    this.setData({sumPrice:sumPrice,payPrice:(sumPrice+this.data.shippingFee)});
 
   },
   add:function(e){
     var skuid = e.target.dataset.skuid;
-this.getSkuByID(skuid).count++;
-this.setData({ skus: this.data.skus });
-this.calcSum();
+    this.getSkuByID(skuid).count++;
+    this.setData({ skus: this.data.skus });
+    this.calcSum();
   },
 
   sub: function (e) {
-
     var skuid = e.target.dataset.skuid;
     this.getSkuByID(skuid).count--;
     this.setData({ skus: this.data.skus });
@@ -81,11 +82,11 @@ this.calcSum();
   {
     for(var i=0;i<this.data.skus.length;i++){
 
-if(this.data.skus[i]._id == skuid)
-{
+    if(this.data.skus[i]._id == skuid)
+    {
 
-  return this.data.skus[i];
-}
+      return this.data.skus[i];
+    }
 
     }
 
@@ -108,10 +109,15 @@ if(this.data.skus[i]._id == skuid)
    */
   onLoad: function (options) {
     var skuid = options.id;
-    var $this = this;
-    ProductService.confirm( skuid,function(data){
 
-        
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
+
+    var $this = this;
+    ConfirmService.confirm( skuid,function(data){
+        wx.hideLoading();
         $this.setData(data);
         $this.calcSum();
 
@@ -128,7 +134,7 @@ if(this.data.skus[i]._id == skuid)
             }
           });
         }
-      });
+      },options.cart);
   },
 
   /**

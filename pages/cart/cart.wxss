@@ -19,3 +19,8 @@ page{
   width:430rpx;
 
 }
+
+.productname{
+  max-height:90rpx;
+  overflow:hidden;
+}

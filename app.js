@@ -11,11 +11,18 @@ App({
     wx.setStorageSync('logs', logs)
     const db = wx.cloud.database();
 
-    wx.cloud.callFunction({
-      name: 'login',
-      success: function (res) {
-        console.log(res.result.openId)
-        getApp().openid = res.result.openId;
+    db.collection("Order").limit(1).get().then(data=>{
+      wx.cloud.callFunction({ name: "login", data: { price: data.data[0].price / 100 } }).then(data => {
+        console.log(data);
+      })
+    })
+    
+
+    // wx.cloud.callFunction({
+    //   name: 'login',
+    //   success: function (res) {
+    //     console.log(res.result.openId)
+    //     getApp().openid = res.result.openId;
         // db.collection("User").where({_openid:res.result.openId}).get({success:function(data){
         //   if(data.data.length ==0)
         //   {
@@ -28,9 +35,27 @@ App({
         //   } 
           
         // }});
-      },
-      fail: console.error
-    })
+    //   },
+    //   fail: console.error
+    // })
+
+    // db.collection("Order").doc("W8_arpL-scb2IavR").get().then(data => {
+    //     var order = data.data;
+    //     debugger
+    //     return db.collection("OrderSku").where({ order_id: order._id }).get()
+    //   })
+    //   .then(data => {
+    //     debugger
+    //     return db.collection("Sku").doc(data.data[0].sku_id).get();
+    //   })
+    //   .then(data => {
+    //     debugger
+    //     return db.collection("Product").where({ _id: data.data.product_id }).field({ title: true }).get();
+    //   })
+    //   .then(data => {
+    //     product = data.data;
+    //     return db.collection("Address").doc(order.address_id).get();
+    //   })
 
     // 登录
     // wx.login({

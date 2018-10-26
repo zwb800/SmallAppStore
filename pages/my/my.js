@@ -8,18 +8,14 @@ Page({
    */
   data: {
   userid:1,
+  orders:new Array(),
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-var $this = this;
-UserService.get(this.data.userid,function(data){
-  console.log(data);
-$this.setData({orders:data});
-
-});
+    this.onShow();
   },
 
   /**
@@ -28,12 +24,33 @@ $this.setData({orders:data});
   onReady: function () {
   
   },
-
+  i: 0,
+  pageSize:5,
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.i = 0;    
+    this.data.orders = [];
+    this.loadData();
+  },
+
+  loadData:function(){
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
+    var $this = this;
+    UserService.get(this.i, this.pageSize, function (data) {
+
+      wx.stopPullDownRefresh();
+      wx.hideLoading();
+      for (var i = 0; i < data.length; i++) {
+        $this.data.orders.push(data[i]);
+      }
+      $this.setData({ orders: $this.data.orders });
+
+    });
   },
 
   /**
@@ -54,14 +71,17 @@ $this.setData({orders:data});
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    
+    this.onShow();
   },
 
+  
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    this.i += this.pageSize;
+    this.loadData();
   },
 
   /**

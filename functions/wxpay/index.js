@@ -72,7 +72,7 @@ exports.main = async (event, context) => {
           create_time: Date.now(),
           status: 0,//Util.orderStatus.等待支付
           price: price,
-          order_num:orderNum,
+          order_num: orderNum,
           _openid: event.userInfo.openId
         }
       });
@@ -91,12 +91,12 @@ exports.main = async (event, context) => {
               order_id: orderID
             }
           })
-          .then(da=>{
-            i++;
-            if (i == event.skus.length) {
-              resolve();
-            }
-          });
+            .then(da => {
+              i++;
+              if (i == event.skus.length) {
+                resolve();
+              }
+            });
         }
       })
     })
@@ -104,9 +104,18 @@ exports.main = async (event, context) => {
     .then(data => {
       return db.collection("Product").doc(event.skus[0].product_id).field({ title: true }).get();
     })
+    .then(data => {
+      return api.getPayParams({
+        out_trade_no: orderNum,
+        body: data.data.title,
+        total_fee: price,
+        openid: event.userInfo.openId
+      })
+    })
     .then(data=>{
-
-        return { body: data.data.title, price: price, orderNum: orderNum,orderID:orderID };
+      data.order_id = orderID;
+      data.openid = event.userInfo.openId;
+      return data;
     })
 }
 
