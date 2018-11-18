@@ -21,8 +21,10 @@ App({
     // wx.cloud.callFunction({
     //   name: 'login',
     //   success: function (res) {
-    //     console.log(res.result.openId)
-    //     getApp().openid = res.result.openId;
+    //     console.log(res.result.userInfo.openId)
+    //     getApp().openid = res.result.userInfo.openId;
+        
+    //     getApp().admin = getApp().openid == "o11Ir5PDVZVosiqboF3jOXQ8ZYMw";
         // db.collection("User").where({_openid:res.result.openId}).get({success:function(data){
         //   if(data.data.length ==0)
         //   {

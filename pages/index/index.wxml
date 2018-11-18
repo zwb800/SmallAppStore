@@ -1,5 +1,10 @@
 <!--index.wxml-->
 <view class="container" style=''>
+
+<navigator wx:if="{{admin}}" url='/pages/admin/addProduct'  class='add_button'>
+<button>添加商品</button>
+</navigator>
+
   <input class="search" style="display:none;" type='text' placeholder='搜索' placeholder-style='text-align:center' ></input>
   <view class='productlist'>
   <navigator wx:key="id" wx:for="{{productList}}" url="{{'/pages/product/product?id='+item._id}}"  class="productitem">

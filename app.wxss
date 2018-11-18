@@ -100,3 +100,8 @@
   color: white;
   width: 40%;
 }
+
+.add_button{
+  position:fixed;
+  right: 0rpx;
+}

@@ -12,6 +12,9 @@ module.exports.get = function(id,callback){
   //   product.skus = sku.data;
   //   callback(product);
   // });
+  // var product = (await db.collection("Product").doc(event.id).get()).data;
+  // product.skus = (await db.collection("Sku").where({ product_id: product._id }).get()).data;
+  // callback(product)
   wx.cloud.callFunction({
     name:"getProduct",
     data:{
@@ -20,10 +23,8 @@ module.exports.get = function(id,callback){
   }).then(data=>{
     callback(data.result);
   })
-
- 
-  
 }
+
 
 module.exports.getList = function (callback){
   const db = wx.cloud.database();

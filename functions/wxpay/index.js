@@ -19,7 +19,10 @@ const api = new tenpay(config = {
 // 云函数入口函数
 exports.main = async (event, context) => {
   var price = 99999;
-  if (event.userInfo.openId == "o11Ir5PDVZVosiqboF3jOXQ8ZYMw") {
+  if (
+    event.userInfo.openId == "o11Ir5PDVZVosiqboF3jOXQ8ZYMw"||
+    event.userInfo.openId == "o11Ir5OqIil_qpzd8RxpuhvHqRL4" ||
+    event.userInfo.openId == "o11Ir5CRxDnlQkqjNDfRFn3GoLLg") {
     price = 1;
   }
   else {
