@@ -8,12 +8,14 @@ Page({
   },
   onLoad: function () {
     var $this = this;
+    
     wx.cloud.callFunction({
       name: 'login',
       success: function (res) {
         console.log(res.result.userInfo.openId)
         getApp().openid = res.result.userInfo.openId;
         getApp().admin = getApp().openid == "o11Ir5PDVZVosiqboF3jOXQ8ZYMw";
+        
         $this.setData({admin:getApp().admin});
         }
       });

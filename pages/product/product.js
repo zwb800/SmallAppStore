@@ -9,7 +9,7 @@ Page({
    */
   data: {
     btnCss: ['selected', "unselected", "unselected", "unselected", "unselected", "unselected"],
-    userid:1,
+    admin:false
   },
 
   /**
@@ -22,6 +22,7 @@ Page({
       mask: true
     })
 
+    this.setData({admin:getApp().admin})
     var $this = this;
      ProductService.get(productid,function(data){
        $this.setData({ product: data,sku:data.skus[0] });
@@ -69,6 +70,16 @@ if(success)
    });
   },
 
+  delProduct:function(){
+    wx.cloud.callFunction({
+      name:"delProduct",
+      data:{id:this.data.product._id}
+    }).then(data=>{
+      wx.reLaunch({
+        url: '/pages/index/index',
+      })
+    });
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

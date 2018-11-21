@@ -1,1 +1,15 @@
-/* pages/admin/addProduct.wxss */
+input,textarea{
+  border: 1px solid gray;
+  margin-bottom: 10rpx;
+  width: 95%;
+}
+
+page{
+  padding: 15rpx;
+}
+
+.sku input{
+  width: 46%;
+  float: left;
+  margin-right: 8rpx;
+}

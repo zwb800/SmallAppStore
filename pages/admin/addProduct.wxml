@@ -1,2 +1,15 @@
-<!--pages/admin/addProduct.wxml-->
-<text>pages/admin/addProduct.wxml</text>
+<form bindsubmit='formSubmit'>
+<input value='{{name}}' name="name" placeholder="商品名，内部使用"/>
+<input value='{{title}}' name="title" placeholder='标题，外部展示'></input>
+<input value='{{img}}' name="img" placeholder='封面图'></input>
+<input value='{{detail}}' name="detail" placeholder='详情图'></input>
+<input value='{{price}}' name="price" placeholder='价格'></input>
+<input wx:key="item" wx:for='{{imgs}}' value='{{item}}' name="imgs_{{index}}" placeholder='轮播图'></input>
+<button bindtap='addImgs'>添加轮播图</button>
+<view class="sku" wx:key="_id" wx:for="{{skus}}">
+  <input name="sku_name_{{index}}" placeholder='规格' value='{{item.name}}'></input>
+  <input name="sku_price_{{index}}" placeholder='价格' value="{{item.price}}"></input>
+</view>
+<button bindtap='addSKU'>添加规格</button>
+<button form-type='submit'>提交</button>
+</form>

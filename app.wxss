@@ -104,4 +104,5 @@
 .add_button{
   position:fixed;
   right: 0rpx;
+  z-index: 100;
 }
