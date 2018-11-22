@@ -25,7 +25,7 @@ Page({
       })
       var $this = this;
       ProductService.get(productid, function (data) {
-        $this.setData({ data});
+        $this.setData(data);
         wx.hideLoading();
       });
     }

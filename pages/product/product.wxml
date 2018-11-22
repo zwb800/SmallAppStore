@@ -1,6 +1,7 @@
-
-<button wx:if="{{admin}}"  class='add_button' bindtap='delProduct'>删除商品</button>
-
+<view class='add_button'>
+  <button wx:if="{{admin}}"  bindtap='delProduct'>删除商品</button>
+  <navigator wx:if="{{admin}}" url='/pages/admin/addProduct?id={{product._id}}'><button bindtap='editProduct'>修改商品</button></navigator>
+</view>
 <swiper indicator-dots="true" indicator-active-color="rgba(255,255,255,255)" indicator-color="rgba(255, 255, 255, .3)">
 <swiper-item wx:key="*this" wx:for="{{product.imgs}}">
   <image style='width:100%;height:750rpx;' src="{{item}}"></image>

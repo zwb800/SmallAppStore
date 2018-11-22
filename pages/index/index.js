@@ -12,13 +12,14 @@ Page({
     wx.cloud.callFunction({
       name: 'login',
       success: function (res) {
-        console.log(res.result.userInfo.openId)
         getApp().openid = res.result.userInfo.openId;
-        getApp().admin = getApp().openid == "o11Ir5PDVZVosiqboF3jOXQ8ZYMw";
+        getApp().admin = 
+          getApp().openid == "o11Ir5PDVZVosiqboF3jOXQ8ZYMw" || //张文彬
+          getApp().openid == "o11Ir5OqIil_qpzd8RxpuhvHqRL4";//翟严
         
         $this.setData({admin:getApp().admin});
-        }
-      });
+      }
+    });
     
     wx.showLoading({
       title: '加载中',

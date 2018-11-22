@@ -2,6 +2,7 @@ input,textarea{
   border: 1px solid gray;
   margin-bottom: 10rpx;
   width: 95%;
+  height: 100rpx;
 }
 
 page{

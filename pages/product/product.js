@@ -71,14 +71,35 @@ if(success)
   },
 
   delProduct:function(){
-    wx.cloud.callFunction({
-      name:"delProduct",
-      data:{id:this.data.product._id}
-    }).then(data=>{
-      wx.reLaunch({
-        url: '/pages/index/index',
-      })
-    });
+    var $this = this;
+    wx.showModal({
+      title: '确定删除?',
+      content: '',
+      success:function(data){
+        if (data.confirm) {
+          wx.cloud.callFunction({
+            name: "delProduct",
+            data: { id: $this.data.product._id }
+          }).then(data => {
+            console.log(data);
+            if(data.result)
+            {
+              wx.reLaunch({
+                url: '/pages/index/index',
+              })
+            }
+            else{
+              wx.showToast({
+                title:"删除失败,已存在订单",
+                icon: 'none',
+              })
+            }
+          
+          });
+        }
+      }
+    })
+
   },
 
   /**
