@@ -11,13 +11,12 @@ App({
     wx.setStorageSync('logs', logs)
     const db = wx.cloud.database();
 
-    db.collection("Order").limit(1).get().then(data=>{
-      wx.cloud.callFunction({ name: "login", data: { price: data.data[0].price / 100 } }).then(data => {
-        console.log(data);
-      })
-    })
+    // db.collection("Order").limit(1).get().then(data=>{
+    //   wx.cloud.callFunction({ name: "login", data: { price: data.data[0].price / 100 } }).then(data => {
+    //     console.log(data);
+    //   })
+    // })
     
-
     // wx.cloud.callFunction({
     //   name: 'login',
     //   success: function (res) {

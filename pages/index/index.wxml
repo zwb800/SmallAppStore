@@ -1,9 +1,12 @@
 <!--index.wxml-->
 <view class="container" style=''>
+<view class='add_button'>
+  <navigator wx:if="{{admin}}" url='/pages/admin/addProduct' >
+  <button>添加商品</button>
+  </navigator>
+  <!-- <button bindgetuserinfo='getUserInfo' open-type='getUserInfo'>获取用户信息</button> -->
+</view>
 
-<navigator wx:if="{{admin}}" url='/pages/admin/addProduct'  class='add_button'>
-<button>添加商品</button>
-</navigator>
 
   <input class="search" style="display:none;" type='text' placeholder='搜索' placeholder-style='text-align:center' ></input>
   <view class='productlist'>

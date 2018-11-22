@@ -7,6 +7,9 @@ Page({
     admin:false,
   },
   onLoad: function () {
+
+
+
     var $this = this;
     
     wx.cloud.callFunction({
@@ -16,7 +19,7 @@ Page({
         getApp().admin = 
           getApp().openid == "o11Ir5PDVZVosiqboF3jOXQ8ZYMw" || //张文彬
           getApp().openid == "o11Ir5OqIil_qpzd8RxpuhvHqRL4";//翟严
-        
+        console.log(getApp().admin?"管理员":"普通用户")
         $this.setData({admin:getApp().admin});
       }
     });
@@ -31,6 +34,10 @@ Page({
       wx.hideLoading()
       wx.stopPullDownRefresh();
     });
+  },
+
+  getUserInfo:function(e){
+    console.log(e);
   },
   onPullDownRefresh: function () {
     this.onLoad();
